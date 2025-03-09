@@ -1,0 +1,90 @@
+Fabric2.4.3 Environment preparation and running test scripts
+
+System Linux-x86 using Ubuntu 24.10
+Version of fabric VERSION=2.4.3
+
+Version of fabric's ca CA_VERSION=1.5.3
+Switch to root before installing
+
+
+docker installation :
+apt-get install docker.io
+apt-get install docker-compose
+
+git installation
+apt-get install git
+
+go language environment
+go language version>=1.16(my version 1.8)
+
+apt-get install golang
+go version
+
+
+Download fabric-sample code
+在/home下新建fabric目录
+Create a new fabric directory under /home
+cd /home
+mkdir fabric
+cd fabric
+
+Then clone the code
+git clone https://github.com/hyperledger/fabric-samples.git
+cd fabric-samples 
+git checkout v2.4.3
+
+
+Download fabric binaries
+wget https://github.com/hyperledger/fabric/releases/download/v2.4.3/hyperledger-fabric-linux-amd64-2.4.3.tar.gz
+wget https://github.com/hyperledger/fabric-ca/releases/download/v1.5.3/hyperledger-fabric-ca-linux-amd64-1.5.3.tar.gz
+
+decompression 
+tar xvzf hyperledger-fabric-linux-amd64-2.4.3.tar.gz
+tar xvzf hyperledger-fabric-ca-linux-amd64-1.5.3.tar.gz
+
+
+The following tool files will be generated in the bin directory
+Set the bin directory as an environment variable
+
+cd bin
+export PATH=${PWD}:$PATH
+
+Return to the fabric-samples directory
+cd ../
+
+Download the docker image
+docker pull hyperledger/fabric-peer:2.4.3
+docker pull hyperledger/fabric-orderer:2.4.3
+docker pull hyperledger/fabric-ccenv:2.4.3
+docker pull hyperledger/fabric-tools:2.4.3
+docker pull hyperledger/fabric-baseos:2.4.3
+docker pull hyperledger/fabric-ca:1.5.3
+
+Change the docker image tag
+docker tag hyperledger/fabric-peer:2.4.3 hyperledger/fabric-peer
+docker tag hyperledger/fabric-peer:2.4.3 hyperledger/fabric-peer:2.4
+docker tag hyperledger/fabric-orderer:2.4.3 hyperledger/fabric-orderer
+docker tag hyperledger/fabric-orderer:2.4.3 hyperledger/fabric-orderer:2.4
+docker tag hyperledger/fabric-ccenv:2.4.3 hyperledger/fabric-ccenv
+docker tag hyperledger/fabric-ccenv:2.4.3 hyperledger/fabric-ccenv:2.4
+docker tag hyperledger/fabric-tools:2.4.3 hyperledger/fabric-tools
+docker tag hyperledger/fabric-tools:2.4.3 hyperledger/fabric-tools:2.4
+docker tag hyperledger/fabric-baseos:2.4.3 hyperledger/fabric-baseos
+docker tag hyperledger/fabric-baseos:2.4.3 hyperledger/fabric-baseos:2.4
+docker tag hyperledger/fabric-ca:1.5.3 hyperledger/fabric-ca
+docker tag hyperledger/fabric-ca:1.5.3 hyperledger/fabric-ca:1.5
+
+Running environment test scripts
+Go to the fabric-samples/test-network folder.
+
+cd test-network
+Launching the blockchain network
+./network.sh up
+
+Create channel
+./network.sh createChannel
+
+Copy the chaincode file fabric-iot.go to the fabric-samples/chaincode directory.
+
+Deployment Chain Code
+./network.sh deployCC -ccn fabric-iot -ccp ../chaincode/fabcar/go -ccv 1 -ccl go
