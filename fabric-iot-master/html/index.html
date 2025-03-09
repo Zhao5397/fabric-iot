@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain-based authentication system for IoT devices</title>
+</head>
+<body>
+    <h1>Blockchain-based authentication system for IoT devices</h1>
+	
+    <form action="/key" method="POST">
+        <label for="name">Step 1:Generate ECC key pairs</label>
+        <button type="submit">fulfillment</button>
+    </form>  
+	<p>PrivateKey:</p>
+	<textarea rows="4" cols="90" style="vertical-align: top;">{{.PrivateKeyStr}}</textarea>
+	<p></p>
+	<p>PublicKey:</p>
+	<textarea rows="4" cols="90" style="vertical-align: top;">{{.PublicKeyStr}}</textarea>	
+	<br/><br/>
+	
+    <form action="/sign" method="POST">
+		<label for="name">Step 2: Generate trust credentials</label>
+		<button type="submit">fulfillment</button>
+		<br/><br/>
+        <label for="name">Master device private key.</label>
+		<textarea rows="3" cols="78" id="devicePrivateKey" name="devicePrivateKey"></textarea>			
+		<br/>
+		<label for="name">Slave device id:&nbsp; &nbsp;&nbsp;</label>
+		<input type="text" id="slaveDeviceId" name="slaveDeviceId">
+		<br/>
+		<label for="name">Domain id:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+		<input type="text" id="domainId" name="domainId">	
+		<br/>		
+        
+    </form> 	
+	<p>Ticket:</p>
+	<textarea rows="4" cols="90" style="vertical-align: top;">{{.Ticket}}</textarea>		
+	<br/><br/>
+	
+    <form action="/user" method="POST">
+		<label for="name">Step 3: User registration</label>
+		<button type="submit">fulfillment</button>
+		<br/><br/>
+        <label for="name">User id:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+		<input type="text" id="userid" name="userid">
+		<br/>
+		<label for="name">Identity of the user:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+		<input type="text" id="role" name="role">
+		<br/>
+		<label for="name">User's organization:</label>
+		<input type="text" id="group" name="group">	
+		<br/>
+		<label for="name">Master device private key:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+		<textarea rows="3" cols="73" id="devicePrivateKey" name="devicePrivateKey"></textarea>			
+		<br/>			
+        
+    </form> 
+	<p>UserTicket:</p>
+	<textarea rows="4" cols="90" style="vertical-align: top;">{{.UserTicket}}</textarea>		
+	<br/><br/>
+	
+    <form action="/encrypt" method="POST">
+		<label for="name">Step 4: Encrypting data</label>
+		<button type="submit">fulfillment</button>
+		<br/><br/>
+        <label for="name">encrypted data</label>
+		<textarea rows="3" cols="80" id="url" name="url"></textarea>
+		<br/>
+		<label for="name">encrypted public key</label>
+		<textarea rows="3" cols="80" id="pubKey" name="pubKey"></textarea>	
+		<br/>		        
+    </form> 
+	<p>CipherText:</p>
+	<textarea rows="4" cols="90" style="vertical-align: top;">{{.CipherText}}</textarea>	
+</body>
+</html>
